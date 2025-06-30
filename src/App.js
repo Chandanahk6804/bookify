@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import MyNavbar from './components/Navbar';
 import List from './pages/List';
 import Home from './pages/Home';
+import Details from './pages/Details';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path='/login' element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>
       <Route path='/book/list' element={<List/>}/>
+      <Route path='/book/view/:bookId' element={<Details/>}/>
     </Routes>
     </div>
       

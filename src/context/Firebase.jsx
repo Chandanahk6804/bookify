@@ -6,7 +6,7 @@ import {getAuth,
   GoogleAuthProvider,
   signInWithPopup,
 onAuthStateChanged,} from 'firebase/auth'
-import {getFirestore,collection,addDoc,getDocs} from 'firebase/firestore'
+import {getFirestore,collection,addDoc,getDocs, doc,getDoc} from 'firebase/firestore'
 
 const FirebaseContext = createContext(null)
 
@@ -64,9 +64,15 @@ export const FirebaseProvider = (props)=>{
   const listAllBooks = ()=>{
     return getDocs(collection(firestore,'books'))
   }
+
+  const getBookById = async (id)=>{
+    const docRef = doc(firestore,'books',id)
+    const result = await getDoc(docRef)
+    return result
+  }
   
     return(
-    <FirebaseContext.Provider value={{signupUserWithEmailAndPassword,signinUserWithEmailAndPassword,signinWithGoogle,isLoggedIn,handleCreateNewListing,listAllBooks}}>
+    <FirebaseContext.Provider value={{signupUserWithEmailAndPassword,getBookById,signinUserWithEmailAndPassword,signinWithGoogle,isLoggedIn,handleCreateNewListing,listAllBooks}}>
         {props.children}
     </FirebaseContext.Provider>
     )
